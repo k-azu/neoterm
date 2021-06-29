@@ -218,10 +218,6 @@ function! neoterm#previous() abort
 endfunction
 
 function! neoterm#destroy(instance) abort
-  if has_key(g:neoterm, 'repl') && get(g:neoterm.repl, 'instance_id') ==# a:instance.id
-    call remove(g:neoterm.repl, 'instance_id')
-  end
-
   if has_key(g:neoterm.instances, a:instance.id)
     if bufexists(a:instance.buffer_id)
       silent! exec printf('%sbdelete!', a:instance.buffer_id)

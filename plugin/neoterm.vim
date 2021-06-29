@@ -55,10 +55,6 @@ if !exists('g:neoterm_size')
   let g:neoterm_size = ''
 end
 
-if !exists('g:neoterm_direct_open_repl')
-  let g:neoterm_direct_open_repl = 0
-end
-
 if !exists('g:neoterm_automap_keys')
   let g:neoterm_automap_keys = ',tt'
 end
@@ -83,26 +79,6 @@ if !exists('g:neoterm_use_relative_path')
   let g:neoterm_use_relative_path = 0
 end
 
-if !exists('g:neoterm_repl_ruby')
-  let g:neoterm_repl_ruby = 'irb'
-end
-
-if !exists('g:neoterm_repl_python')
-  let g:neoterm_repl_python = ''
-end
-
-if !exists('g:neoterm_repl_r')
-  let g:neoterm_repl_r = 'R'
-end
-
-if !exists('g:neoterm_repl_octave_qt')
-  let g:neoterm_repl_octave_qt = 0
-end
-
-if !exists('g:neoterm_repl_php')
-  let g:neoterm_repl_php = ''
-end
-
 if !exists('g:neoterm_eof')
   let g:neoterm_eof = ''
 end
@@ -119,9 +95,6 @@ if !exists('g:neoterm_open_in_all_tabs')
   let g:neoterm_open_in_all_tabs = 0
 end
 
-if !exists('g:neoterm_auto_repl_cmd')
-  let g:neoterm_auto_repl_cmd = 1
-end
 
 if !exists('g:neoterm_command_prefix')
   let g:neoterm_command_prefix = ''
@@ -129,18 +102,6 @@ end
 
 if !exists('g:neoterm_term_per_tab')
   let g:neoterm_term_per_tab = 0
-end
-
-if exists('g:neoterm_position')
-  echoe '*g:neoterm_position* DEPRECATED! see :help g:neoterm_position'
-end
-
-if exists('g:neoterm_split_on_tnew')
-  echoe '*g:neoterm_split_on_tnew* DEPRECATED! see :help g:neoterm_split_on_tnew'
-end
-
-if exists('g:neoterm_tnew_mod')
-  echoe '*g:neoterm_tnew_mod* DEPRECATED! see :help g:neoterm_split_on_tnew'
 end
 
 if !exists('g:neoterm_marker')
@@ -202,19 +163,3 @@ command! Tprevious
       \ call neoterm#previous()
 command! Tls
       \ call neoterm#list_ids()
-" REPL
-command! -bar -complete=customlist,neoterm#list -nargs=1 TREPLSetTerm
-      \ call neoterm#repl#term(<q-args>)
-command! -range=% TREPLSendFile
-      \ call neoterm#repl#line(<line1>, <line2>)
-command! -range TREPLSendSelection
-      \ call neoterm#repl#selection()
-command! -range TREPLSendLine
-      \ call neoterm#repl#line(<line1>, <line2>)
-" REPL selection mappings
-nnoremap <silent> <Plug>(neoterm-repl-send)
-      \ :<c-u>set opfunc=neoterm#repl#opfunc<cr>g@
-xnoremap <silent> <Plug>(neoterm-repl-send)
-      \ :<c-u>call neoterm#repl#selection()<cr>
-nnoremap <silent> <Plug>(neoterm-repl-send-line)
-      \ :<c-u>set opfunc=neoterm#repl#opfunc<bar>exe 'norm! 'v:count1.'g@_'<cr>
